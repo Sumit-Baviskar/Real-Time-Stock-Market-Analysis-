@@ -24,6 +24,8 @@ Many traders and analysts struggle to make fast, data-driven decisions in the st
 
  ## **⚙️ Architecture :**
 
+ ![Image](https://github.com/user-attachments/assets/1e189968-1de6-446c-bee6-e10f3d8a5e64)
+
   - **Python simulator :** Generates stock price, volume, and timestamp.
 
   - **Kafka :** Streams data in real time.
@@ -123,7 +125,9 @@ Many traders and analysts struggle to make fast, data-driven decisions in the st
 
    🔗 [LinkedIn](https://www.linkedin.com/in/sumit-baviskar/)  
 
-   🔗 [Portfolio/GitHub](https://nice-web-16a.notion.site/Hello-I-m-Sumit-Baviskar-18e7130b12678024b30fc011c22427b7)
+   🔗 [Portfolio](https://nice-web-16a.notion.site/Hello-I-m-Sumit-Baviskar-18e7130b12678024b30fc011c22427b7)
+
+   🔗 [GitHub](https://github.com/Sumit-Baviskar)
 
    📧 [Gmail](https://mail.google.com/mail/?view=cm&to=st.baviskar43@gmail.com)
 
