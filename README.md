@@ -1,4 +1,4 @@
-#  🚀📈**Real Time Stock Market Analysis ans Signal System**
+#  🚀📈**Real Time Stock Market Analysis and Signal System**
 
 ## **Introduction :**
 
