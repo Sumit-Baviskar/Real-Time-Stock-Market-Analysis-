@@ -82,40 +82,118 @@ Many traders and analysts struggle to make fast, data-driven decisions in the st
 
 ## **⚙️ How It Works :**
 
-  🟢 **Step 1 : Simulate Real-Time Stock Data :**
-   - A Python script continuously generates mock stock data (symbol, price, volume, timestamp).
+🧰 Step 1: Install Java (Kafka Dependency)
+    
+   - Kafka requires Java to run. Install it using:
 
-   - Every second, new stock records are created to simulate a live feed.
+    sudo apt update
+    sudo apt install default-jdk -y
+    java -version
 
-🟠 **Step 2: Stream Data to Kafka :**
 
-   - The simulator sends data to a Kafka topic called stock-topic.
+📦 Step 2: Download & Extract Kafka
 
-   - Kafka acts as a real-time message broker, buffering and distributing data efficiently.
+    wget https://downloads.apache.org/kafka/3.6.0/kafka_2.13-3.6.0.tgz
+    tar -xzf kafka_2.13-3.6.0.tgz
+    cd kafka_2.13-3.6.0
 
-🟡 **Step 3: Push Data to AWS S3 :**
 
-   - A Kafka consumer (or Kafka Connect sink) writes streaming data into S3 as JSON files.
 
-   - Data is stored in a structured path (e.g., s3://your-bucket/stock_data/YYYY/MM/DD/).
+⚙️ Step 3: Start Zookeeper
 
-🔵 **Step 4: Catalog with AWS Glue :**
+- Kafka needs Zookeeper to manage its brokers. You can start it in the foreground (for debugging) or background.
+
+       # Foreground (for testing)
+       bin/zookeeper-server-start.sh config/zookeeper.properties
+
+
+
+🧠 Step 4: Start Kafka Broker
+
+
+- Start Kafka after Zookeeper is running:
+
+      bin/kafka-server-start.sh config/server.properties
+
+ 
+🔐 Step 5: Configure EC2 Security Group
+
+
+In your AWS Console:
+
+  - Navigate to Security Groups attached to your EC2
+
+  - Add Inbound Rules for the following:
+
+     - Port 22 (SSH)
+
+     - Port 9092 (Kafka)
+
+     - Port 2181 (Zookeeper)
+
+This allows external tools or machines (like your local machine or S3) to communicate with Kafka.
+
+
+🧪 Step 6: Create Kafka Topic
+
+     bin/kafka-topics.sh --create \
+    --topic stock-data-stream \
+    --bootstrap-server localhost:9092 \
+    --partitions 1 \
+    --replication-factor 1
+
+🐍 Step 7: Python Environment Setup
+
+- Install required Python libraries:
+
+      sudo apt install python3-pip -y
+      pip install kafka-python boto3 pandas pytz
+
+- Use an IAM Role with proper permissions if running inside the EC2 instance.
+
+
+📤 Step 8: Run Your Producer Script
+
+ - Your producer script simulates real-time stock market data every 30 seconds. Run it like:
+
+ - Code Link Here [python3 producer_simulator.py](https://github.com/Sumit-Baviskar/Real-Time-Stock-Market-Analysis-/blob/main/producer_simulator.py)
+
+ - If you’re using time.sleep(30), there’s NO NEED to use flush() forcibly unless you notice data is not being pushed in real-time.
+
+
+📥 Step 9: Run Consumer Script (Saves to S3)
+Your consumer script receives messages and writes them to a CSV or Parquet file, uploading them to S3:
+
+ - Code Link Here [python3 consumer_to_s3.py](https://github.com/Sumit-Baviskar/Real-Time-Stock-Market-Analysis-/blob/main/kafka_consumer_to_s3.py)
+
+ - **Ensure this script:**
+
+   - Batches or collects messages
+
+   - Writes to a file
+
+   - Uploads to a defined S3 bucket
+
+
+
+🔵 **Step 10: Catalog with AWS Glue :**
 
    - AWS Glue Crawler scans the S3 bucket and automatically detects schema.
 
    - It creates or updates a table in Glue Data Catalog, making data queryable.
 
-🟣 **Step 5: Query with AWS Athena :**
+
+🟣 **Step 11: Query with AWS Athena :**
 
    - Athena runs SQL queries on top of S3 via Glue Catalog.
 
-   It calculates:
+  -  It calculates:
 
-   - SMA 9 & SMA 21 using window functions.
+      - SMA 9 & SMA 21 using window functions.
 
-   - Volume comparison logic for signal confirmation.
+      - Volume comparison logic for signal confirmation.
 
-   - Generates Buy, Sell, or Hold signals based on SMA crossovers and volume spikes.
+      - Generates Buy, Sell, or Hold signals based on SMA crossovers and volume spikes.
 
 ### **SQL Code in AWS Athena :**
 
