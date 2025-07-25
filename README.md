@@ -103,7 +103,7 @@ Many traders and analysts struggle to make fast, data-driven decisions in the st
 
 - Kafka needs Zookeeper to manage its brokers. You can start it in the foreground (for debugging) or background.
 
-       # Foreground (for testing)
+  
        bin/zookeeper-server-start.sh config/zookeeper.properties
 
 
@@ -247,6 +247,7 @@ Your consumer script receives messages and writes them to a CSV or Parquet file,
         "symbol", ts DESC;
 
 
+  - [Output Athena Download scv file](https://github.com/Sumit-Baviskar/Real-Time-Stock-Market-Analysis-/blob/main/ATHENA%20stock_signal_output%20.csv) 
 
 ## 👨‍💻 **Author**
 
