@@ -82,7 +82,7 @@ Many traders and analysts struggle to make fast, data-driven decisions in the st
 
 ## **⚙️ How It Works :**
 
-🧰 Step 1: Install Java (Kafka Dependency)
+### 🧰 **Step 1: Install Java (Kafka Dependency)**
     
    - Kafka requires Java to run. Install it using:
 
@@ -91,7 +91,7 @@ Many traders and analysts struggle to make fast, data-driven decisions in the st
     java -version
 
 
-📦 Step 2: Download & Extract Kafka
+### 📦 **Step 2: Download & Extract Kafka**
 
     wget https://downloads.apache.org/kafka/3.6.0/kafka_2.13-3.6.0.tgz
     tar -xzf kafka_2.13-3.6.0.tgz
@@ -99,7 +99,7 @@ Many traders and analysts struggle to make fast, data-driven decisions in the st
 
 
 
-⚙️ Step 3: Start Zookeeper
+### ⚙️ **Step 3: Start Zookeeper**
 
 - Kafka needs Zookeeper to manage its brokers. You can start it in the foreground (for debugging) or background.
 
@@ -108,7 +108,7 @@ Many traders and analysts struggle to make fast, data-driven decisions in the st
 
 
 
-🧠 Step 4: Start Kafka Broker
+### 🧠 **Step 4: Start Kafka Broker**
 
 
 - Start Kafka after Zookeeper is running:
@@ -116,7 +116,7 @@ Many traders and analysts struggle to make fast, data-driven decisions in the st
       bin/kafka-server-start.sh config/server.properties
 
  
-🔐 Step 5: Configure EC2 Security Group
+### 🔐 **Step 5: Configure EC2 Security Group**
 
 
 In your AWS Console:
@@ -134,7 +134,7 @@ In your AWS Console:
 This allows external tools or machines (like your local machine or S3) to communicate with Kafka.
 
 
-🧪 Step 6: Create Kafka Topic
+### 🧪 **Step 6: Create Kafka Topic**
 
      bin/kafka-topics.sh --create \
     --topic stock-data-stream \
@@ -142,7 +142,8 @@ This allows external tools or machines (like your local machine or S3) to commun
     --partitions 1 \
     --replication-factor 1
 
-🐍 Step 7: Python Environment Setup
+### 🐍 **Step 7: Python Environment Setup**
+
 
 - Install required Python libraries:
 
@@ -152,7 +153,7 @@ This allows external tools or machines (like your local machine or S3) to commun
 - Use an IAM Role with proper permissions if running inside the EC2 instance.
 
 
-📤 Step 8: Run Your Producer Script
+### 📤 **Step 8: Run Your Producer Script**
 
  - Your producer script simulates real-time stock market data every 30 seconds. Run it like:
 
@@ -161,7 +162,8 @@ This allows external tools or machines (like your local machine or S3) to commun
  - If you’re using time.sleep(30), there’s NO NEED to use flush() forcibly unless you notice data is not being pushed in real-time.
 
 
-📥 Step 9: Run Consumer Script (Saves to S3)
+### 📥 **Step 9: Run Consumer Script (Saves to S3)**
+
 Your consumer script receives messages and writes them to a CSV or Parquet file, uploading them to S3:
 
  - Code Link Here [python3 consumer_to_s3.py](https://github.com/Sumit-Baviskar/Real-Time-Stock-Market-Analysis-/blob/main/kafka_consumer_to_s3.py)
@@ -176,14 +178,14 @@ Your consumer script receives messages and writes them to a CSV or Parquet file,
 
 
 
-🔵 **Step 10: Catalog with AWS Glue :**
+### 🔵 **Step 10: Catalog with AWS Glue :**
 
    - AWS Glue Crawler scans the S3 bucket and automatically detects schema.
 
    - It creates or updates a table in Glue Data Catalog, making data queryable.
 
 
-🟣 **Step 11: Query with AWS Athena :**
+### 🟣 **Step 11: Query with AWS Athena :**
 
    - Athena runs SQL queries on top of S3 via Glue Catalog.
 
