@@ -157,7 +157,7 @@ This allows external tools or machines (like your local machine or S3) to commun
 
  - Your producer script simulates real-time stock market data every 30 seconds. Run it like:
 
- - Code Link Here [python3 producer_simulator.py](https://github.com/Sumit-Baviskar/Real-Time-Stock-Market-Analysis-/blob/main/producer_simulator.py)
+ - Code Link Here [python3 producer_simulator.py](https://github.com/Sumit-Baviskar/Real-Time-Stock-Market-Analysis-and-Signal-System/blob/main/Producer%20simulator%20python%20code/producer_simulator.py)
 
  - If you’re using time.sleep(30), there’s NO NEED to use flush() forcibly unless you notice data is not being pushed in real-time.
 
@@ -166,7 +166,7 @@ This allows external tools or machines (like your local machine or S3) to commun
 
 Your consumer script receives messages and writes them to a CSV or Parquet file, uploading them to S3:
 
- - Code Link Here [python3 consumer_to_s3.py](https://github.com/Sumit-Baviskar/Real-Time-Stock-Market-Analysis-/blob/main/kafka_consumer_to_s3.py)
+ - Code Link Here [python3 consumer_to_s3.py](https://github.com/Sumit-Baviskar/Real-Time-Stock-Market-Analysis-and-Signal-System/blob/main/Consumer%20Simulator%20code/kafka_consumer_to_s3.py)
 
  - **Ensure this script:**
 
