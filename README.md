@@ -247,7 +247,7 @@ Your consumer script receives messages and writes them to a CSV or Parquet file,
         "symbol", ts DESC;
 
 
-  ### - [Output Athena Download CSV file](https://github.com/Sumit-Baviskar/Real-Time-Stock-Market-Analysis-/blob/main/ATHENA%20stock_signal_output%20.csv) 
+  ### - [Output Athena Download CSV file](https://github.com/Sumit-Baviskar/Real-Time-Stock-Market-Analysis-and-Signal-System/blob/main/Signal%20output%20CSV%20file/ATHENA%20stock_signal_output%20.csv) 
 
 ## 👨‍💻 **Author**
 
